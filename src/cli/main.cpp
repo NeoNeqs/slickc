@@ -1,7 +1,10 @@
 #include <CLI/CLI.hpp>
+#include <fmt/base.h>
 #include <fmt/format.h>
 #include <spdlog/spdlog.h>
 
+#include <cstdlib>
+#include <exception>
 #include <string>
 #include <vector>
 
