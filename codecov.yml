@@ -1,0 +1,6 @@
+# Codecov repository upload token.
+# Your maintenance settings page suggests putting it here instead of a CI
+# secret, so uploads work without configuring a CODECOV_TOKEN secret.
+# Regenerate the token at app.codecov.io if this ever needs to be rotated.
+codecov:
+  token: e13f14f8-e786-4d7a-ad75-5040b64a5ea3
