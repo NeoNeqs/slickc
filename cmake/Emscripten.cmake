@@ -45,7 +45,7 @@ if(EMSCRIPTEN)
   set(slickc_WASM_ASYNCIFY_STACK_SIZE "65536" CACHE STRING
       "Asyncify stack size in bytes (default: 64KB)")
 
-  # For Emscripten WASM builds, FTXUI requires pthreads and exception handling.
+  # For Emscripten WASM builds we use pthreads and JS exception handling.
   # We use -fexceptions (JS-based exceptions) rather than -fwasm-exceptions
   # because native wasm exceptions are incompatible with legacy Asyncify, and
   # JSPI (the modern Asyncify replacement) is not yet shipping in all browsers.
