@@ -34,6 +34,11 @@ macro(slickc_supports_sanitizers)
 
   if((CMAKE_CXX_COMPILER_ID MATCHES ".*Clang.*" OR CMAKE_CXX_COMPILER_ID MATCHES ".*GNU.*") AND WIN32)
     set(SUPPORTS_ASAN OFF)
+  elseif(MSVC)
+    # MSVC's ASan emits MSVC 14.51+ container/optional annotations on our
+    # targets only, while CPM dependency libs compile without them, causing
+    # LNK2038 'annotate_optional' link mismatches. Default it off for MSVC.
+    set(SUPPORTS_ASAN OFF)
   else()
     if (NOT WIN32)
       message(STATUS "Sanity checking AddressSanitizer, it should be supported on this platform")
