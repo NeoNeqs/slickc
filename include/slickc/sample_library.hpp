@@ -3,7 +3,9 @@
 
 #include <slickc/sample_library_export.hpp>
 
-[[nodiscard]] SAMPLE_LIBRARY_EXPORT int factorial(int) noexcept;
+// The parameter name in the declaration must match the definition;
+// cppcheck's funcArgNamesDifferent check fails the build otherwise
+[[nodiscard]] SAMPLE_LIBRARY_EXPORT int factorial(int input) noexcept;
 
 [[nodiscard]] constexpr int factorial_constexpr(int input) noexcept
 {
