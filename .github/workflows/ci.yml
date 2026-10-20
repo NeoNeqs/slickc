@@ -10,7 +10,7 @@ on:
       - develop
 
 env:
-  CLANG_TIDY_VERSION: "19.1.1"
+  CLANG_TIDY_VERSION: "21.1.8"
   VERBOSE: 1
 
 
@@ -35,7 +35,7 @@ jobs:
           - windows-latest
         compiler:
           # you can specify the version after `-` like "llvm-15.0.2".
-          - llvm-19.1.1
+          - llvm-21.1.8
           - gcc-14
         generator:
           - "Ninja Multi-Config"
@@ -60,7 +60,7 @@ jobs:
             gcov_executable: gcov-14
             enable_ipo: On
 
-          - compiler: llvm-19.1.1
+          - compiler: llvm-21.1.8
             enable_ipo: Off
             gcov_executable: "llvm-cov gcov"
 
@@ -84,34 +84,34 @@ jobs:
           # Windows msvc builds
           - os: windows-latest
             compiler: msvc
-            generator: "Visual Studio 17 2022"
+            generator: "Visual Studio 18 2026"
             build_type: Debug
             packaging_maintainer_mode: On
             enable_ipo: On
 
           - os: windows-latest
             compiler: msvc
-            generator: "Visual Studio 17 2022"
+            generator: "Visual Studio 18 2026"
             build_type: Release
             packaging_maintainer_mode: On
             enable_ipo: On
 
           - os: windows-latest
             compiler: msvc
-            generator: "Visual Studio 17 2022"
+            generator: "Visual Studio 18 2026"
             build_type: Debug
             packaging_maintainer_mode: Off
 
           - os: windows-latest
             compiler: msvc
-            generator: "Visual Studio 17 2022"
+            generator: "Visual Studio 18 2026"
             build_type: Release
             packaging_maintainer_mode: Off
             package_generator: ZIP
 
           - os: windows-latest
             compiler: msvc
-            generator: "Visual Studio 17 2022"
+            generator: "Visual Studio 18 2026"
             build_type: Release
             packaging_maintainer_mode: On
             enable_ipo: On
@@ -148,7 +148,9 @@ jobs:
           compiler: ${{ matrix.compiler }}
           vcvarsall: ${{ contains(matrix.os, 'windows' )}}
 
-          cmake: true
+          # CMake 4.2+ is required for the "Visual Studio 18 2026" generator
+          # (the windows-latest image no longer ships VS 2022)
+          cmake: ${{ contains(matrix.generator, 'Visual Studio') && '4.4.4' || true }}
           ninja: true
           vcpkg: false
           ccache: true
