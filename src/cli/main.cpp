@@ -3,6 +3,7 @@
 #include <fmt/format.h>
 #include <spdlog/spdlog.h>
 
+#include <cstdio>
 #include <cstdlib>
 #include <exception>
 #include <string>
