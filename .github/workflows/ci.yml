@@ -216,5 +216,4 @@ jobs:
           fail_ci_if_error: true # we weren't posting previously
           flags: ${{ runner.os }}
           name: ${{ runner.os }}-coverage
-          token: ${{ secrets.CODECOV_TOKEN }}
           files: ./build/coverage.xml
