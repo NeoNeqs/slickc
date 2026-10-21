@@ -23,9 +23,11 @@ when you are a dependency.
 
 ## C++ standard
 
-C++23, set only if a parent project has not chosen one. `CMAKE_CXX_EXTENSIONS`
-is off so the standard flag is `-std=c++23`, not `-std=gnu++23`. This avoids
-`-Wpedantic` conflicts with precompiled headers.
+C++26, set only if a parent project has not chosen one. `CMAKE_CXX_EXTENSIONS`
+is off so the standard flag is `-std=c++26`, not `-std=gnu++26`. This avoids
+`-Wpedantic` conflicts with precompiled headers. MSVC targets remain at the
+C++23 tier, as MSVC exposes its C++26 features via `/std:c++latest`; CMake
+maps that tier for us (see the comment in the top-level `CMakeLists.txt`).
 
 ## Warnings
 

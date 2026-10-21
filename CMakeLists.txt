@@ -9,7 +9,7 @@ cmake_policy(SET CMP0155 OLD)
 
 # Only set the cxx_standard if it is not set by someone else
 if (NOT DEFINED CMAKE_CXX_STANDARD)
-  set(CMAKE_CXX_STANDARD 23)
+  set(CMAKE_CXX_STANDARD 26)
 endif()
 
 # strongly encouraged to enable this globally to avoid conflicts between
@@ -24,6 +24,15 @@ project(
   DESCRIPTION ""
   HOMEPAGE_URL "https://github.com/NeoNeqs/slickc"
   LANGUAGES CXX C)
+
+# MSVC has no /std:c++26 switch; MSVC Build Tools 14.50+ (VS 2026) ships the
+# C++26 standard-library features under /std:c++latest, which CMake maps for
+# the *C++23* compile feature. So MSVC targets compile at the 23 tier while
+# GCC / Clang / Emscripten targets get a real -std=c++26. Must follow
+# project() so that MSVC detection has happened.
+if (MSVC)
+  set(CMAKE_CXX_STANDARD 23)
+endif()
 
 include(cmake/PreventInSourceBuilds.cmake)
 include(cmake/Emscripten.cmake)
